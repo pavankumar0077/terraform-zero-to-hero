@@ -1,10 +1,17 @@
+
+## DOC REF LINK : https://registry.terraform.io/browse/providers
+
+
 ![image](https://github.com/pavankumar0077/terraform-zero-to-hero/assets/40380941/b33fef89-5dba-446d-831d-fee850c1eb29)
 
 Variables
 --
-![image](https://github.com/pavankumar0077/terraform-zero-to-hero/assets/40380941/b8ffd6f8-388e-4e3e-8e50-7f299b0d301e)
-![image](https://github.com/pavankumar0077/terraform-zero-to-hero/assets/40380941/8e1142e9-377e-4771-b24d-d299491c4e6d)
+![image](https://github.com/pavankumar0077/terraform-zero-to-hero/assets/40380941/643a079c-5819-4f82-85a0-e3c982a12a90)
+
+
+Conditional vars
+--
+![image](https://github.com/pavankumar0077/terraform-zero-to-hero/assets/40380941/e4197171-67a8-448a-a2a0-de45e81b40e9)
 
 
 
-DOC REF LINK : https://registry.terraform.io/browse/providers
