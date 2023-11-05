@@ -11,6 +11,8 @@ Problems
 
 ### NOTE : The above problems can to fixed by **REMOTE BACKEND**
 
+### Doc Ref : https://developer.hashicorp.com/terraform/language/settings/backends/s3
+
 REMOTE BACKEND
 --
 - Changellens of Storing state file in external resources in AWS S3 BUCKET, You don't have worry about local terraform state file
