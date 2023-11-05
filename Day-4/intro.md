@@ -40,6 +40,10 @@ Disadvantages
 - Stores passwords as well like policis, SNS and S3 and etc
 - Any sensitive data will also we will stroes like secrets
 
+Cooommands
+--
+``` terraform show ``` --Is used to show the state file
+
 ![image](https://github.com/pavankumar0077/terraform-zero-to-hero/assets/40380941/256007d8-53a7-470b-86e7-63358dc6a790)
 
 ![image](https://github.com/pavankumar0077/terraform-zero-to-hero/assets/40380941/050471d1-d0e3-42a6-8fe1-321d03efb752)
