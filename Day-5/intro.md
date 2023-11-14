@@ -30,8 +30,8 @@ Provisioners
 
 ![image](https://github.com/pavankumar0077/terraform-zero-to-hero/assets/40380941/bbaeb9b7-5c86-4593-bbf1-0280b9d4ca9d)
 
-Remote exec provisioner -- At the time of creating EC2 instance itself, You can connec to that particular instance and execute the commands like python, java or any commands
-Local exec -- Ex: We want to print something on the screen, Like echo steps like 1,2... etc, If we have 10,000 lines to print, then we are asking terraform to save this in a file.
-File provisioner -- Used to copy the files, Let say we have ec2 and we want to copy 10 files, using file provisioner we can do it.
+-- Remote exec provisioner -- At the time of creating EC2 instance itself, You can connec to that particular instance and execute the commands like python, java or any commands
+-- Local exec -- Ex: We want to print something on the screen, Like echo steps like 1,2... etc, If we have 10,000 lines to print, then we are asking terraform to save this in a file.
+-- File provisioner -- Used to copy the files, Let say we have ec2 and we want to copy 10 files, using file provisioner we can do it.
 
 
