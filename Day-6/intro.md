@@ -49,3 +49,119 @@ TO SOLVE THE ABOVE PROBELM
 -- Inside this there will a folder for DEV,STAGE AND PROD (Depending up on how many env's do you create) or how many workspaces do you ccreate if you create 100 workspaces with in the same folder within the same project you will have folders for each env inside the each folder we have state file.
 -- Now when you are in Dev worksapce dev statefile will be executed, when we are in stage then stage statefile will be executed. same with prod as well
 -- Now the STATEFILE are not overlapping
+
+Commands
+--
+``` terraform apply -var-file=stage.tfvars ``` To apply another terraform config.
+
+![image](https://github.com/pavankumar0077/terraform-zero-to-hero/assets/40380941/b38a78e3-2f21-44e0-abe4-6ec7e90d192f)
+
+- Here existing infra is modifing, but not creating for each env
+- To solve this issue we have to use **TERRAFORM WORKSPACE**
+
+![image](https://github.com/pavankumar0077/terraform-zero-to-hero/assets/40380941/694138b2-9bd7-4b60-80e8-7d7eda4b2c88)
+
+Commands
+--
+To create workspace
+--
+```
+terraform workspace new dev
+```
+- To create dev env
+
+```
+terrform workspace new stage
+```
+- To create stage env and same for prod as well
+
+![image](https://github.com/pavankumar0077/terraform-zero-to-hero/assets/40380941/097387d4-cf02-4dc8-9571-dbe0e8ed2299)
+
+```
+terraform workspace -h
+```
+- Used to check all the available tags for the commans
+
+```
+terraform workspace select dev
+```
+- Used to switch between workspaces
+
+```
+terraform workspace show
+```
+- Used to check in which workspace you are in
+
+### Now i swtiched to dev workspace and used init and apply commands
+- SO STATEFILE is created only in the dev env
+
+![image](https://github.com/pavankumar0077/terraform-zero-to-hero/assets/40380941/6c22705c-c951-4ea4-aacd-6b1db0b19187)
+
+### Now i switched to stage worksapce and used apply commands used t2.medium
+![image](https://github.com/pavankumar0077/terraform-zero-to-hero/assets/40380941/e57e32ef-3e22-461f-9067-e275c3efa254)
+![image](https://github.com/pavankumar0077/terraform-zero-to-hero/assets/40380941/b862d496-a625-4b87-8da4-a949cd324cae)
+
+- micro is dev env instance
+- medium is stage env instance
+
+## Now delete the resouces 
+- switch the dev
+- terraform destroy
+- same for other env's as well
+
+Ways to work with tfvars file for different env's
+==
+
+1ST WAY
+--
+### Now we are update the terraform.tf vars file every time to change the insttace type 
+```
+terraform apply -var-file=prod.tfvars
+```
+- Like this.
+- For this we need to create tfvars file for each and every env and apply accordingly 
+
+2ND WAY
+--
+- Go to main.tf file
+- Before changes
+- ![image](https://github.com/pavankumar0077/terraform-zero-to-hero/assets/40380941/1b8854ea-c1b4-46b8-a992-19e90b7cf2c6)
+- ![image](https://github.com/pavankumar0077/terraform-zero-to-hero/assets/40380941/4d2e21aa-a21c-40b7-9000-50a754afe0f6)
+- After changes
+- NOW REMOVE THE VALUES FORM TERRAFORM.TFVARS FILE
+```
+provider "aws" {
+  region = "us-east-1"
+}
+
+variable "ami" {
+    description = "value"
+  
+}
+
+# variable "instance_type" {
+#   description = "value"
+# }
+
+variable "instance_type" {
+  description = "value"
+  type = map(string)
+
+  default = {
+    "dev" = "t2.micro"
+    "stage" = "t2.medium"
+    "prod" = "t2.xlarge"
+  }
+}
+
+
+module "ec2_instance" {
+    source = "./modules/ec2_instance"
+    ami = var.ami
+    instance_type = lookup(var.instance_type, terraform.workspace, "t2.micro")
+  
+}
+```
+- Here in the ``` instance_type = lookup(instance_type, terraform.workspace, "t2.micro") ```
+- Lookup will look for the map, (instance type, workspace - like in which workspace it is, and here t2.micor is the default if there is not workspace available with the name mentioned then t2.micro will will applied)
+### Now when i try to apply in prod or stage env we can do it without changing the terraform.tfvars file everytime.
